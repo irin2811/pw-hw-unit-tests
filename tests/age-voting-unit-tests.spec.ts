@@ -2,12 +2,17 @@ import { test, expect } from '@playwright/test';
 import { checkVotingAge } from './age-voting';
 
 test('Користувачі менші 18ти років не можуть голосувати', async () => {
-  const votingResult = checkVotingAge(15);
+  const votingResult = checkVotingAge(17);
   expect(votingResult).toBe("Ви ще не можете голосувати.");
 });
 
-test('Користувачі з 18ти років і старші можуть голосувати', async () => {
+test('Користувачі 18ти років можуть голосувати', async () => {
   const votingResult = checkVotingAge(18);
+  expect(votingResult).toBe("Ви можете голосувати.");
+});
+
+test('Користувачі старші 18ти років можуть голосувати', async () => {
+  const votingResult = checkVotingAge(19);
   expect(votingResult).toBe("Ви можете голосувати.");
 });
 
